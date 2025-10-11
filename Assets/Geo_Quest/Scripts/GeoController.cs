@@ -52,6 +52,8 @@ public class GeoController : MonoBehaviour
         {
             rb.velocity = new Vector2(xInput, yInput * jumpmult);
         }
+        
+
 
 
         if (Input.GetKeyDown(KeyCode.Alpha1))
