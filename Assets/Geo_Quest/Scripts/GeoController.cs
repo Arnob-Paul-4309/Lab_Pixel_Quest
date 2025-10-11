@@ -31,13 +31,14 @@ public class GeoController : MonoBehaviour
   
 
     private Rigidbody2D rb;
+    private SpriteRenderer Sr;
     public int multiplier = 5;
     public int jumpmult = 10;
     // Start is called before the first frame update
      void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        
+        Sr = GetComponent<SpriteRenderer>();   
     }
 
     // Update is called once per frame
@@ -51,7 +52,21 @@ public class GeoController : MonoBehaviour
         {
             rb.velocity = new Vector2(xInput, yInput * jumpmult);
         }
-        
+
+
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            Sr.color = new Color(1, 0, 1);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            Sr.color = new Color(0, 1, 0);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            Sr.color = new Color((float)0.5, (float)0.3, (float)0.9);
+
+        }
         /*
         if (Input.GetKeyDown(KeyCode.A))
         {
