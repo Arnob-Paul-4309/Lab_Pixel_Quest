@@ -33,7 +33,6 @@ public class GeoController : MonoBehaviour
     private Rigidbody2D rb;
     private SpriteRenderer Sr;
     public int multiplier = 5;
-    public int jumpmult = 10;
     // Start is called before the first frame update
      void Start()
     {
@@ -45,13 +44,10 @@ public class GeoController : MonoBehaviour
      void Update()
     {
         float xInput = Input.GetAxis("Horizontal");
-        float yInput = Input.GetAxis("Vertical");
+  
         rb.velocity = new Vector2(xInput * multiplier, rb.velocity.y);
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            rb.velocity = new Vector2(xInput, yInput * jumpmult);
-        }
+
         
 
 
