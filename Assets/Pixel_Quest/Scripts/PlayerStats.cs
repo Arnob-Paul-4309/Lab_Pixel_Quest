@@ -5,36 +5,58 @@ using UnityEngine.SceneManagement;
 
 public class PlayerStats : MonoBehaviour
 {
-    public string Level2 = "Scene_2";
+
+    public Transform respawnPoint;
+    private int CoinCounter = 0;
+    private int _health = 3;
+    private int _maxHealth = 3;
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("Hit");
-
         switch (collision.tag)
         {
-            case "Death":
-                {
-                    string thisLevel = SceneManager.GetActiveScene().name;
-                    SceneManager.LoadScene(thisLevel);
-                    break;
-                }
             case "Finish":
                 {
-                    SceneManager.LoadScene(Level2);
+                    string nextLevel = collision.transform.GetComponent<LevelGoal>().nextLevel;
+                    SceneManager.LoadScene(nextLevel);
+                    break;
+
+                }
+            case "Health":
+                {
+                    if (_health < _maxHealth)
+                    {
+                        Destroy(collision.gameObject);
+                        _health++;
+                    }
+                    break;
+                }
+            case "Coin":
+                {
+                    CoinCounter++;
+                    Destroy(collision.gameObject);
+                    break;
+                }
+            case "Death":
+                {
+                    _health--;
+                    if (_health <= 0)
+                    {
+                        string thisLevel = SceneManager.GetActiveScene().name;
+                        SceneManager.LoadScene(thisLevel);
+                    }
+                    else
+                    {
+                        transform.position = respawnPoint.position;
+                    }
+                        break;
+
+                }
+            case "Respawn":
+                {
+                    respawnPoint.position = collision.transform.Find("Point").position;
                     break;
                 }
 
         }
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
